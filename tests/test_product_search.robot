@@ -1,6 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
-Resource    ../resources/keywords.robot
+
 
 *** Variables ***
 ${URL}      https://magento.softwaretestingboard.com/
