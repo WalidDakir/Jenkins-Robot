@@ -1,5 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
+Resource    ../resources/keywords.robot
 
 *** Variables ***
 ${URL}      https://magento.softwaretestingboard.com/
@@ -8,8 +9,5 @@ ${BROWSER}  chrome
 *** Test Cases ***
 Test Add Product To Cart
     Open Browser    ${URL}    ${BROWSER}
-    Click Element    xpath=//a[contains(text(), 'Men’s Hoodie')]
-    Wait Until Element Is Visible    id=product-addtocart-button
-    Click Element    id=product-addtocart-button
-    Wait Until Page Contains    "You added"
+    Add Product To Cart   168    57  
     Close Browser
