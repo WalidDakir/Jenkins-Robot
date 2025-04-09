@@ -1,7 +1,7 @@
 *** Settings ***
-
-
-[[
+Library    SeleniumLibrary
+Resource   ../resources/variables.robot
+Resource    ../resources/keywords.robot
 
 *** Test Cases ***
 Test User Login
@@ -10,4 +10,3 @@ Test User Login
     Login As User           ${EMAIL}    ${PASSWORD}
     Verify Login Success
     Close Browser
-#test
