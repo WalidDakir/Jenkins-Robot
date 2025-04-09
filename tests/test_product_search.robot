@@ -1,6 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
-
+[[[
 
 *** Variables ***
 ${URL}      https://magento.softwaretestingboard.com/
