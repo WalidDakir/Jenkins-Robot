@@ -1,7 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
 Resource   ../resources/variables.robot
-Resource    ../resources/keywords.robot
+
 
 *** Test Cases ***
 Test User Login
