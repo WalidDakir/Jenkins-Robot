@@ -1,6 +1,6 @@
 *** Settings ***
 Library    SeleniumLibrary
-[[[
+Resource    ../resources/keywords.robot
 
 *** Variables ***
 ${URL}      https://magento.softwaretestingboard.com/
@@ -11,4 +11,3 @@ Test Product Search
     Open Browser    ${URL}    ${BROWSER}
     Product Search    
     Close Browser
-
