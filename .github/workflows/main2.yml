@@ -1,0 +1,47 @@
+name: Exécution Quotidienne des Tests Robot Framework
+
+on:
+  schedule:
+    # Exécute tous les jours à 07:00 UTC
+    # (ce qui correspond à 08:00 à Casablanca en heure normale,
+    # ou 09:00 en heure d'été si appliquée)
+    - cron: '0 7 * * *'
+  workflow_dispatch: # Permet de déclencher le workflow manuellement depuis GitHub
+
+jobs:
+  run_robot_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout du code
+      uses: actions/checkout@v4
+      # Cette action va cloner l'intégralité du dépôt GitHub
+      # https://github.com/WalidDakir/Jenkins-Robot/
+
+    - name: Configurer Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x' # Utilise la dernière version de Python 3
+
+    - name: Installer les dépendances Robot Framework
+      run: |
+        python -m pip install --upgrade pip
+        # Installe les dépendances listées dans le requirements.txt qui doit être à la racine du dépôt
+        # (ex: https://github.com/WalidDakir/Jenkins-Robot/blob/main/requirements.txt)
+        pip install -r requirements.txt
+
+    - name: Exécuter les tests Robot Framework
+      run: |
+        # Cette commande exécute tous les fichiers .robot trouvés dans le dossier 'tests/'
+        # de votre dépôt, car le dépôt est cloné à la racine.
+        # Le chemin 'tests/' est correct si vos tests sont directement sous le dossier 'tests'
+        # comme indiqué dans l'URL (https://github.com/WalidDakir/Jenkins-Robot/tree/main/tests)
+        robot tests/
+
+    - name: Publier les Rapports de Tests (Artefact)
+      uses: actions/upload-artifact@v4
+      with:
+        name: robot-framework-reports
+        # Robot Framework génère ses rapports dans un dossier 'output/' par défaut
+        path: output/
+        retention-days: 7 # Garde les rapports pendant 7 jours
